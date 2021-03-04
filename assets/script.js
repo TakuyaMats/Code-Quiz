@@ -1,11 +1,3 @@
-// Make var with array and object for questions
-// Make list of global variables
-// Make a timer function
-// Make timer button 
-// Make timer trigger with the start button
-// Make a function for the page screen to display when completing the quiz or once the timer runs out
-// Input local storage initials and score
-
 var highScore = document.getElementById('highScore');
 var timeRemaining = document.getElementById('time-remaining');
 var landingPage = document.getElementById('landing-container');
@@ -35,10 +27,11 @@ var questions = [{
 ]
 
 startQuiz.addEventListener("click", function () {
-    
+
+    showQuestions();
+
     function getNextQuestion(userChoice) {
         let userQuestions = questions[currentQuestions].answer; 
-
             if (userChoice === userQuestions) {
                 console.log("Correct!");
                 score++;
@@ -62,27 +55,6 @@ startQuiz.addEventListener("click", function () {
     return getNextQuestion;
 })
 
-function answersClicks() {
-    var a = document.getElementById("answer1");
-    var b = document.getElementById("answer2");
-    var c = document.getElementById("answer3");
-    var d = document.getElementById("answer4");
-
-    a.addEventListener("click", function (){ getNextQuestion(a.innerText); });
-    b.addEventListener("click", function (){ getNextQuestion(b.innerText); });
-    c.addEventListener("click", function (){ getNextQuestion(c.innerText); });
-    d.addEventListener("click", function (){ getNextQuestion(d.innerText); });
+function showQuestions () {
+    document.getElementById("questionsPrompt").innerHTML = questions[0].title;
 }
-answersClicks();
-
-// // render the question prompt
-// function generateQuiz(questionIndex) {
-//     questionsDiv.innerHTML = "";
-//     createUl.innerHTML = "";
-
-//     for (var i = 0; i < questions.length; i++) {
-//         var userQuestion = questions[questionIndex].title;
-//         var userChoice = questions[questionIndex].choices;
-//         questionsDiv.textContent = userQuestion;
-//     }
-// }
