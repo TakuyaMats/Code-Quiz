@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="./assets/style.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+    <title>Code Quiz</title>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container navbar-container mx-0">
+        <div class="row w-100">
+            <div class="col-4 col-md-2">
+                <button type="button" id="highScore" class="btn btn-info">High Score</button>
+            </div>
+            <div class="col-3 col-md-7"></div>
+            <div class="col-5 col-md-3">
+                <form>
+                    <div class="form-group row">
+                        <label for="time-remaining" class="col-sm-7 col-form-label">Time Remaining</label>
+                        <div class="col-sm-5">
+                            <input type="number" readonly class="form-control" id="time-remaining" placeholder="0">
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </nav>
+
+    <div id="landing-container" class="container">
+        <div class="row mb-3">
+            <div id ="questionsDiv" class="col-12 text-center">
+                <h1>Code Quiz</h1>
+            </div>
+        </div>
+        <div class="row mb-3">
+            <div class="col-12 text-center">
+                <p>Answer all the questions before the timer runs out!</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12 text-center">
+                <button id="start-button" type="button" class="btn btn-secondary btn-lg">Start Quiz</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="final-result" class="containter d-none">
+        <div class="row">
+            <div class="col-12 text-center">
+                <form>
+                    <div class="form-group row">
+                        <label for="final-score" class="col-sm-7 col-form-label"></label>
+                        <div class="col-sm-5">
+                            <input type="number" readonly class="form-control" id="final-score" placeholder="0">
+                        </div>
+                    </div>
+                </form>
+                <form>
+                    <div class="form-group">
+                        <button id="submit-initials" type="button" class="btn btn-primary"></button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous">
+    </script>
+    <script src="./assets/script.js"></script>
+</body>
+
+</html>
