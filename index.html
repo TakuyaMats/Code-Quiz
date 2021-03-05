@@ -11,29 +11,32 @@
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <div class="container navbar-container mx-0">
-        <div class="row w-100">
-            <div class="col-4 col-md-2">
-                <button type="button" id="highScore" class="btn btn-info">High Score</button>
-            </div>
-            <div class="col-3 col-md-7"></div>
-            <div class="col-5 col-md-3">
-                <form>
-                    <div class="form-group row">
-                        <label for="time-remaining" class="col-sm-7 col-form-label">Time Remaining</label>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <div class="container navbar-container mx-0">
+            <div class="row w-100">
+                <div class="col-4 col-md-2">
+                    <label for="high-score" class="d-inline p-2 bg-primary text-white rounded text-uppercase">High Score</label>
                         <div class="col-sm-5">
-                            <input type="number" readonly class="form-control" id="time-remaining" placeholder="0">
+                            <div type="number" readonly class="form-control mr-sm-2" id="highScore" placeholder="0"></div>
                         </div>
-                    </div>
-                </form>
+                </div>
+                <div class="col-3 col-md-7"></div>
+                <div class="col-5 col-md-3">
+                    <form>
+                        <div class="form-group row">
+                            <label for="time-remaining" class="col-sm-7 col-form-label">Time Remaining</label>
+                            <div class="col-sm-5">
+                                <div type="number" readonly class="form-control" id="time-remaining" placeholder="0"></div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
             </div>
-        </div>
     </nav>
 
     <div id="landing-container" class="container">
         <div class="row mb-3">
-            <div id ="questionsDiv" class="col-12 text-center">
+            <div id="questionsDiv" class="col-12 text-center">
                 <h1>Code Quiz</h1>
             </div>
         </div>
