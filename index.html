@@ -5,23 +5,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="./assets/style.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans&display=swap" rel="stylesheet">
     <title>Code Quiz</title>
 </head>
 
 <body>
     <nav class="score-tracker">
-        <div class="justify-center flex-row">
-            <form>
-                <div>
-                    <label for="high-score">High Score</label>
-                    <div type="number" id="highScore" placeholder="0"></div>
-                </div>
-                <div>
-                    <label for="time-remaining">Time Remaining</label>
-                    <div type="number" id="time-remaining" placeholder="0"></div>
-                </div>
-            </form>
-        </div>
+        <form>
+            <div class="score">
+                <label for="high-score">High Score</label>
+                <div type="number" id="highScore" placeholder="0"></div>
+            </div>
+            <div class="timer">
+                <label for="time-remaining">Time Remaining:</label>
+                <div type="number" id="time-remaining" placeholder="0"></div>
+            </div>
+        </form>
     </nav>
     <div class="container">
         <h1>Code Quiz</h1>
@@ -38,8 +38,8 @@
             </div>
         </div>
         <div class="controls">
-            <button id="start-button" type="button" class="btn btn-secondary btn-lg">Start Quiz</button>
-            <button id="next-button" class="next-btn btn hide">Next</button>
+            <button id="start-button" class="start-btn">Start Quiz</button>
+            <button id="next-button" class="next-btn hide">Next</button>
         </div>
     </div>
     <script src="./assets/script.js"></script>

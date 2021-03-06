@@ -3,20 +3,19 @@ const timerDisplay = document.getElementById('time-remaining');
 const landingPage = document.getElementById('landing-container');
 const startQuiz = document.getElementById('start-button');
 const nextButton = document.getElementById('next-button');
+const pElement = document.querySelector('p')
 const submitInitials = document.getElementById('submit-initials');
 const createUl = document.createElement("ul");
 const questionsContainer = document.getElementById('question-container');
 const choices = Array.from(document.querySelectorAll('.box'));
 const questionElement = document.getElementById('question');
 const questionButtonsElement = document.getElementById('answer-buttons');
+
 let shuffledQuestions;
 let currentQuestionIndex;
-
 let secondsLeft = 120;
 let highScore = 0;
 let scorePoints = 100;
-let maxQuestions = 5;
-let questionCounter = 0;
 let myTimer;
 let currentQuestion = {};
 underScoreArray = [];
@@ -93,6 +92,11 @@ startQuiz.addEventListener("click", function () {
     startTimer()
 });
 
+nextButton.addEventListener('click', () => {
+    currentQuestionIndex++
+    setNextQuestion()
+})
+
 function setNextQuestion() {
     resetState()
     showQuestion(shuffledQuestions[currentQuestionIndex])
@@ -113,10 +117,37 @@ function showQuestion(question) {
 }
 
 function SelectAnswer(e){
+    const selectedButton = e.target
+    const correct = selectedButton.dataset.correct
+    setStatusClass(document.body, correct)
+    Array.from(questionButtonsElement.children).forEach(button => {
+        setStatusClass(button, button.dataset.correct)
+    })
+    if (shuffledQuestions.length > currentQuestionIndex +1){
+        nextButton.classList.remove('hide')
+    } else {
+        startQuiz.innerText = 'Restart'
+        startQuiz.classList.remove('hide')
+        pElement.classList.remove('hide')
+    }
+}
 
+function setStatusClass(element, correct) {
+    clearStatusClass(element)
+    if (correct) {
+        element.classList.add('correct')
+    } else {
+        element.classList.add('wrong')
+    }
+}
+
+function clearStatusClass(element) {
+    element.classList.remove('correct');
+    element.classList.remove('wrong');
 }
 
 function resetState() {
+    clearStatusClass(document.body)
     nextButton.classList.add('hide')
     while(questionButtonsElement.firstChild) {
         questionButtonsElement.removeChild
