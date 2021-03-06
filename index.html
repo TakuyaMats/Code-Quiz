@@ -5,85 +5,43 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="./assets/style.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
     <title>Code Quiz</title>
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-        <div class="container navbar-container mx-0">
-            <div class="row w-100">
-                <div class="col-4 col-md-2">
-                    <label for="high-score" class="d-inline p-2 bg-primary text-white rounded text-uppercase">High Score</label>
-                        <div class="col-sm-5">
-                            <div type="number" readonly class="form-control mr-sm-2" id="highScore" placeholder="0"></div>
-                        </div>
+    <nav class="score-tracker">
+        <div class="justify-center flex-row">
+            <form>
+                <div>
+                    <label for="high-score">High Score</label>
+                    <div type="number" id="highScore" placeholder="0"></div>
                 </div>
-                <div class="col-3 col-md-7"></div>
-                <div class="col-5 col-md-3">
-                    <form>
-                        <div class="form-group row">
-                            <label for="time-remaining" class="col-sm-7 col-form-label">Time Remaining</label>
-                            <div class="col-sm-5">
-                                <div type="number" readonly class="form-control" id="time-remaining" placeholder="0"></div>
-                            </div>
-                        </div>
-                    </form>
+                <div>
+                    <label for="time-remaining">Time Remaining</label>
+                    <div type="number" id="time-remaining" placeholder="0"></div>
                 </div>
-            </div>
+            </form>
+        </div>
     </nav>
-
-    <div id="landing-container" class="container">
-        <div class="row mb-3">
-            <div id="questionsDiv" class="col-12 text-center">
-                <h1>Code Quiz</h1>
-            </div>
-        </div>
-        <div class="row mb-3">
-            <div class="col-12 text-center">
-                <p>Answer all the questions before the timer runs out!</p>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-12 text-center">
-                <button id="start-button" type="button" class="btn btn-secondary btn-lg">Start Quiz</button>
-            </div>
-        </div>
-    </div>
-
     <div class="container">
+        <h1>Code Quiz</h1>
+        <p>Answer all the questions before the timer runs out!</p>
         <div class="justify-center flex-column">
-            <div id="question">Question</div>
-            <div id="choice1">choice1</div>
-            <div id="choice2">choice2</div>
-            <div id="choice3">choice3</div>
-            <div id="choice4">choice4</div>
-        </div>
-    </div>
-
-    <div id="final-result" class="container d-none">
-        <div class="row">
-            <div class="col-12 text-center">
-                <form>
-                    <div class="form-group row">
-                        <label for="final-score" class="col-sm-7 col-form-label"></label>
-                        <div class="col-sm-5">
-                            <input type="number" readonly class="form-control" id="final-score" placeholder="0">
-                        </div>
-                    </div>
-                </form>
-                <form>
-                    <div class="form-group">
-                        <button id="submit-initials" type="button" class="btn btn-primary"></button>
-                    </div>
-                </form>
+            <div id="question-container" class="hide">
+                <div id="question">Question</div>
+                <div id="answer-buttons" class="btn-grid">
+                    <button class="btn">Choice 1</button>
+                    <button class="btn">Choice 2</button>
+                    <button class="btn">Choice 3</button>
+                    <button class="btn">Choice 4</button>
+                </div>
             </div>
         </div>
+        <div class="controls">
+            <button id="start-button" type="button" class="btn btn-secondary btn-lg">Start Quiz</button>
+            <button id="next-button" class="next-btn btn hide">Next</button>
+        </div>
     </div>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous">
-    </script>
     <script src="./assets/script.js"></script>
 </body>
 

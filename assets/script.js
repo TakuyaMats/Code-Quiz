@@ -2,153 +2,124 @@ const highScoreElement = document.getElementById('highScore');
 const timerDisplay = document.getElementById('time-remaining');
 const landingPage = document.getElementById('landing-container');
 const startQuiz = document.getElementById('start-button');
+const nextButton = document.getElementById('next-button');
 const submitInitials = document.getElementById('submit-initials');
 const createUl = document.createElement("ul");
-const questionsPrompt = document.getElementById('question-prompt');
-const questionsElement = document.getElementById('question');
-const progressText = document.querySelector('#progressText')
-const choices = Array.from(document.querySelectorAll('.choice-text'));
+const questionsContainer = document.getElementById('question-container');
+const choices = Array.from(document.querySelectorAll('.box'));
+const questionElement = document.getElementById('question');
+const questionButtonsElement = document.getElementById('answer-buttons');
+let shuffledQuestions;
+let currentQuestionIndex;
 
 let secondsLeft = 120;
 let highScore = 0;
 let scorePoints = 100;
 let maxQuestions = 5;
-let questionIndex = 0;
+let questionCounter = 0;
 let myTimer;
 let currentQuestion = {};
 underScoreArray = [];
 
-let questions = [
-    {
+let questions = [{
         question: "What is the correct definition of an HTML element?",
-        choice1: "The second, or closing, HTML tag. Closing tags have a forward slash (/) inside them.",
-        choice2: "HTML code that does not require opening or closing tags.",
-        choice3: "An HTML tag and the content that it contains or marks up.",
-        choice4: "The first, opening, HTML tag",
-        answer: 3,
+        answer: [
+            { text: "The second, or closing, HTML tag. Closing tags have a forward slash (/) inside them.", correct: false},
+            { text: "HTML code that does not require opening or closing tags.", correct: false },
+            { text: "An HTML tag and the content that it contains or marks up.", correct: true },
+            { text: "The first, opening, HTML tag", correct: false },
+        ],
     },
     {
         question: "What's the difference between <embed> and <video>?",
-        choice1: "<video> can only be used for video, while <embed> can be used for any type of media.",
-        choice2: "<embed> does not support video while <video> does.",
-        choice3: "<embed> is used in the header of the document while <video> can be used anywhere.",
-        choice4: "<video> is semantic element while <embed> is not.",
-        answer: 1,
+        answer: [
+            { text: "<video> can only be used for video, while <embed> can be used for any type of media.", correct: true},
+            { text: "<embed> does not support video while <video> does.", correct: false },
+            { text: "<embed> is used in the header of the document while <video> can be used anywhere.", correct: false },
+            { text: "<video> is semantic element while <embed> is not.", correct: false },
+        ],
     },
     {
         question: "Why is the <div> tag not semantic?",
-        choice1: "It requires a closing tag.",
-        choice2: "It provides context as to what content is inside of the tag.",
-        choice3: "It provides no context as to what the content is inside the tag.",
-        choice4: "It can be used multiple times throughout the code.",
-        answer: 3,
+        answer: [
+            { text: "It requires a closing tag.", correct: false },
+            { text: "It provides context as to what content is inside of the tag.", correct: false },
+            { text: "It provides no context as to what the content is inside the tag.", correct: true },
+            { text: "It can be used multiple times throughout the code.", correct: false },
+        ],
     },
     {
         question: "What is the purpose of indentation and whitespace?",
-        choice1: "To comment out code you don't need.",
-        choice2: "To make code in an HTML file more readable",
-        choice3: "To change the display of elements in the browser.",
-        choice4: "To make sure the browser correctly interprets nested elements in an HTML file.",
-        answer: 2,
+        answer: [
+            { text: "To comment out code you don't need.", correct: false },
+            { text: "To make code in an HTML file more readable", correct: true },
+            { text: "To change the display of elements in the browser.", correct: false },
+            { text: "To make sure the browser correctly interprets nested elements in an HTML file.", correct: false },
+        ],
     },
     {
         question: "Why should the document type declaration be included in all HTML documents?",
-        choice1: "To specify what content will display in the browser.",
-        choice2: "Without it, the web page will not be allowed on the internet.",
-        choice3: "To specify the HTML standard being used in the content.",
-        choice4: "Without it, any HTML code is invalid.",
-        answer: 3,
+        answer: [
+            { text: "To specify what content will display in the browser.", correct: false },
+            { text: "Without it, the web page will not be allowed on the internet.", correct: false },
+            { text: "To specify the HTML standard being used in the content.", correct: true },
+            { text: "Without it, any HTML code is invalid.", correct: false },
+        ],
     }
 ]
 
-startQuiz.addEventListener("click", function() {
+startQuiz.addEventListener("click", function () {
 
-    questionCounter = 0;
-    score = 0;
-    availableQuestions = [...questions];
+    startQuiz.classList.add('hide')
+    shuffledQuestions = questions.sort(() => Math.random() - .5);
+    currentQuestionIndex = 0;
+    questionsContainer.classList.remove('hide')
+    setNextQuestion()
 
-    function startGame() {
+    function startTimer() {
         underScoreArray = [];
         let secondsLeft = 120;
-        timerDisplay.textContent = secondsLeft; 
-        }
-        myTimer = setInterval(alertTime, 1000);
-    
+        timerDisplay.textContent = secondsLeft;
+    }
+    myTimer = setInterval(alertTime, 1000);
+
     function alertTime() {
         if (secondsLeft > 0) {
-            secondsLeft-- ;
+            secondsLeft--;
             return timerDisplay.textContent = secondsLeft;
         }
-        clearInterval(myTimer); 
+        clearInterval(myTimer);
     }
-    startGame()
-    getNewQuestion();
+    startTimer()
 });
 
-
-
-
-
-
-
-
-
-
-
-
-
-// Placeholder code to see how to get the questions to show up for the user.
-getNewQuestion = () => {
-    if (availableQuestions.length === 0 || questionCounter > maxQuestions) {
-        localStorage.setItem('mostRecentScore', score)
-
-        return window.location.assign('/end.html')
-    }
-
-    questionCounter++
-    progressText.innerText = `Question ${questionCounter} of ${maxQuestions}`
-    progressBarFull.style.width = `${(questionCounter/maxQuestions) * 100}%`
-    
-    const questionsIndex = Math.floor(Math.random() * availableQuestions.length)
-    currentQuestion = availableQuestions[questionsIndex]
-    question.innerText = currentQuestion.question
-
-    choices.forEach(choice => {
-        const number = choice.dataset['number']
-        choice.innerText = currentQuestion['choice' + number]
-    })
-
-    availableQuestions.splice(questionsIndex, 1)
-
-    acceptingAnswers = true
+function setNextQuestion() {
+    resetState()
+    showQuestion(shuffledQuestions[currentQuestionIndex])
 }
 
-choices.forEach(choice => {
-    choice.addEventListener('click', e => {
-        if(!acceptingAnswers) return
-
-        acceptingAnswers = false
-        const selectedChoice = e.target
-        const selectedAnswer = selectedChoice.dataset['number']
-
-        let classToApply = selectedAnswer == currentQuestion.answer ? 'correct' : 'incorrect'
-
-        if(classToApply === 'correct') {
-            incrementScore(scorePoints)
+function showQuestion(question) {
+    questionElement.innerText = question.question
+    question.answer.forEach(answer => {
+        const button = document.createElement('button')
+        button.innerText = answer.text
+        button.classList.add('btn')
+        if (answer.correct) {
+            button.dataset.correct = answer.correct
         }
-
-        selectedChoice.parentElement.classList.add(classToApply)
-
-        setTimeout(() => {
-            selectedChoice.parentElement.classList.remove(classToApply)
-            getNewQuestion()
-
-        }, 1000)
+        button.addEventListener('click', SelectAnswer)
+        questionButtonsElement.appendChild(button)
     })
-})
-
-incrementScore = num => {
-    score +=num
-    scoreText.innerText = score
 }
-// Placeholder code to see how to get the questions to show up for the user.
+
+function SelectAnswer(e){
+
+}
+
+function resetState() {
+    nextButton.classList.add('hide')
+    while(questionButtonsElement.firstChild) {
+        questionButtonsElement.removeChild
+        (questionButtonsElement.firstChild)
+    }
+}
