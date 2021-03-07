@@ -132,7 +132,7 @@ function SelectAnswer(e){
         questionButtonsElement.classList.add('disable')
         nextButton.classList.remove('hide')
     } else {
-        window.location.assign('/end.html')
+        window.location.assign('end.html')
         startQuiz.classList.remove('hide')
         pElement.classList.remove('hide')
         h1Element.classList.add('hide')
