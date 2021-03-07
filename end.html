@@ -1,30 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./assets/end.css">
     <title>Ending Page</title>
 </head>
+
 <body>
-    <div id="final-result" class="container d-none">
-        <div class="row">
-            <div class="col-12 text-center">
-                <form>
-                    <div class="form-group row">
-                        <label for="final-score" class="col-sm-7 col-form-label"></label>
-                        <div class="col-sm-5">
-                            <input type="number" readonly class="form-control" id="final-score" placeholder="0">
-                        </div>
-                    </div>
-                </form>
-                <form>
-                    <div class="form-group">
-                        <button id="submit-initials" type="button" class="btn btn-primary"></button>
-                    </div>
-                </form>
-            </div>
+    <div class="container">
+        <div id="end" class="flex-center flex-column">
+            <h1 id="finalScore">0</h1>
+            <form class="end-form-container">
+                <h2 id="end-text">Enter your name below to save your score!</h2>
+                    <input type="text" name="name" id="username" placeholder="Enter your name">
+                    <button class="btn" id="saveScoreBtn" type="submit" onClick="saveHighScore(event)" disabled>Save</button>
+            </form>
         </div>
     </div>
-    <script src="assets/script.js"></script>
+    </form>
+    <a href="/index.html" class="btn">Play Again</a>
+    <script src="./assets/script.js"></script>
 </body>
+
 </html>

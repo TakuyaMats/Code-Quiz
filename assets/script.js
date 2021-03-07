@@ -4,6 +4,7 @@ const landingPage = document.getElementById('landing-container');
 const startQuiz = document.getElementById('start-button');
 const nextButton = document.getElementById('next-button');
 const pElement = document.querySelector('p')
+const h1Element = document.querySelector('h1')
 const submitInitials = document.getElementById('submit-initials');
 const createUl = document.createElement("ul");
 const questionsContainer = document.getElementById('question-container');
@@ -69,6 +70,9 @@ let questions = [{
 
 startQuiz.addEventListener("click", function () {
 
+    highScore = 0;
+    pElement.classList.add('hide')
+    h1Element.classList.add('hide')
     startQuiz.classList.add('hide')
     shuffledQuestions = questions.sort(() => Math.random() - .5);
     currentQuestionIndex = 0;
@@ -113,6 +117,7 @@ function showQuestion(question) {
         }
         button.addEventListener('click', SelectAnswer)
         questionButtonsElement.appendChild(button)
+        questionButtonsElement.classList.remove('disable')
     })
 }
 
@@ -124,12 +129,20 @@ function SelectAnswer(e){
         setStatusClass(button, button.dataset.correct)
     })
     if (shuffledQuestions.length > currentQuestionIndex +1){
+        questionButtonsElement.classList.add('disable')
         nextButton.classList.remove('hide')
     } else {
-        startQuiz.innerText = 'Restart'
+        window.location.assign('/end.html')
         startQuiz.classList.remove('hide')
         pElement.classList.remove('hide')
+        h1Element.classList.add('hide')
+    };
+    if (selectedButton.dataset = correct) {
+        highScore += 100;
+    } else {
+        secondsLeft -= 25;
     }
+    highScoreElement.innerHTML = highScore;
 }
 
 function setStatusClass(element, correct) {
