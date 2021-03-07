@@ -136,6 +136,7 @@ function SelectAnswer(e){
         startQuiz.classList.remove('hide')
         pElement.classList.remove('hide')
         h1Element.classList.add('hide')
+        localStorage.setItem('mostRecentScore', highScore)
     };
     if (selectedButton.dataset = correct) {
         highScore += 100;
